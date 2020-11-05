@@ -29,6 +29,40 @@ Use a graphical tool like `SQLite Studio` to open `./data/northwind.db3` and exe
 - Display the name and quantity of the products ordered in order with Id 10251. Sort by ProductName. Returns 3 records.
 - Display the OrderID, customer's Company Name and the employee's Last Name for every order. All columns should be labeled clearly. Returns 16,789 records.
 
+
+select 
+    p.productname as 'Product',
+    s.companyname as 'Company'
+from Product as p
+join Supplier as s
+    on p.supplierid = s.id;
+    
+SELECT 
+    o.id AS 'Order ID',
+    s.companyname AS 'Shipper'
+FROM [Order] AS o
+JOIN Shipper AS s
+    ON o.ShipVia = s.id
+WHERE o.OrderDate < '2012-08-09';
+
+select 
+    o.shipname as 'Name',
+    od.quantity as 'Quantity'
+from orderdetail as od
+join [Order] as o
+    on od.orderid = o.id
+where od.orderid = 10251;
+
+select
+    o.shipname as 'Name',
+    c.companyname as 'Company',
+    e.lastname as 'Employee'
+from [Order] as o
+join customer as c
+    on o.customerid = c.id
+join employee as e
+    on o.employeeid = e.id
+
 ### Database Methods
 
 Write helpers methods in `./schemes/scheme-model.js` that match the following specifications:
